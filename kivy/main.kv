@@ -1,0 +1,89 @@
+#:kivy 2.1.0
+
+# Menambahkan ScreenManager untuk mengelola layar-layar
+ScreenManager:
+    StartScreen:
+    GameScreen:
+    GameOverScreen:  # Menambahkan GameOverScreen
+
+# Layar StartScreen
+<StartScreen>:
+    name: "start"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                source: "images/background.png"  # Background layar Start
+                size: self.size
+                pos: self.pos
+
+        # Spacer untuk mengatur posisi tombol di tengah layar
+        Widget:
+            size_hint_y: 0.4  # Spacer dengan ukuran proporsional
+
+        # Tombol untuk memulai permainan
+        Button:
+            size_hint: None, None
+            size: 500, 100  # Ukuran tombol
+            pos_hint: {"center_x": 0.5}  # Tombol diposisikan di tengah horizontal
+            background_normal: "images/start2.png"  # Gambar latar tombol
+            background_down: "images/start2.png"  # Gambar latar tombol saat ditekan
+            border: 0, 0, 0, 0  # Menghilangkan border tombol
+            on_release: app.root.current = "game"  # Berpindah ke layar GameScreen
+
+        # Spacer untuk menyeimbangkan layout
+        Widget:
+            size_hint_y: 0.6  # Spacer dengan ukuran proporsional
+
+# Layar GameScreen
+<GameScreen>:
+    name: "game"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                source: "images/background_game.png"  # Background layar Game
+                size: self.size
+                pos: self.pos
+
+        # Konten permainan di sini
+        # Misalnya, Anda bisa menambahkan elemen game yang lebih kompleks di bawah ini
+
+        # Spacer untuk memberi jarak antara elemen-elemen di dalam layar
+        Widget:
+            size_hint_y: 0.8  # Ukuran proporsional untuk konten permainan
+
+        # Tombol untuk berpindah ke layar GameOver setelah permainan selesai
+        Button:
+            size_hint: None, None
+            size: 500, 100  # Ukuran tombol
+            pos_hint: {"center_x": 0.5}  # Tombol diposisikan di tengah horizontal
+            background_normal: "images/exit_game.png"  # Gambar latar tombol
+            background_down: "images/exit_game.png"  # Gambar latar tombol saat ditekan
+            border: 0, 0, 0, 0  # Menghilangkan border tombol
+            on_release: app.root.current = "game_over"  # Berpindah ke layar GameOverScreen
+
+# Layar GameOverScreen
+<GameOverScreen>:
+    name: "game_over"
+    BoxLayout:
+        orientation: "vertical"
+        canvas.before:
+            Rectangle:
+                source: "images/background.png"  # Background layar Game Over
+                size: self.size
+                pos: self.pos
+
+        # Spacer untuk mengatur posisi tombol di tengah layar
+        Widget:
+            size_hint_y: 0.4  # Spacer dengan ukuran proporsional
+
+        # Tombol untuk memulai ulang permainan
+        Button:
+            size_hint: None, None
+            size: 500, 100  # Ukuran tombol
+            pos_hint: {"center_x": 0.5}  # Tombol diposisikan di tengah horizontal
+            background_normal: "images/restart.png"  # Gambar latar tombol restart
+            background_down: "images/restart.png"  # Gambar latar tombol saat ditekan
+            border: 0, 0, 0, 0  # Menghilangkan border tombol
+            on_release: app.root.current = "game"  # Berpindah ke layar GameScreen untuk memulai ulang permainan
